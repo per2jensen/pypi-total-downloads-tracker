@@ -73,6 +73,7 @@ After editing, push everything to GitHub. The included workflow will run daily a
     README.md
 
 You can also trigger the workflow manually via the Actions tab.
+The schedule is commented out in the workflow - remove the `#` and enjoy daily automatic updates to the download totals number :-)
 
 ## 📁 Project Structure
 ```text
