@@ -1,5 +1,7 @@
 # 📦 PyPI Total Downloads Tracker
 
+[![](https://img.shields.io/badge/readme-auto--update-blue)](https://github.com/per2jensen/pypi-total-downloads-tracker)
+
 > 📦 Track total PyPI downloads for your package — with real stats and a live badge, powered by GitHub Actions.
 
 A self-hosted, GitHub Actions-powered tool that tracks daily **PyPI download stats** and displays a **live total** in your project's `README.md` using a **Shields.io badge**.
