@@ -46,16 +46,19 @@ Add this line where you want the live total to appear:
 <!--TOTAL_DOWNLOADS-->
 ```
 
-It will be automatically updated to:
+The README.md will be automatically updated and the change committed to the repo.
 
-<!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 5284
+Please observe that the script currently expects the marker to start at a line.
 
 
-or you could
+Example of how it looks:
+> <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 5284
+
+### or you could
 
 ### 4. Add the badge to your README
 
-You can also add this Shields.io badge:
+You can also add this Shields.io (this uses an external service) badge:
 
 Substitute this in the badge "code" below:
 
@@ -88,24 +91,12 @@ The schedule is commented out in the workflow - remove the `#` and enjoy daily a
         └── update_downloads.yml  # The GitHub Action
 ```
 
-
-
 ## 📖 License
 
 MIT — use it, fork it, improve it.
-
-
 
 ## 🙌 Credits
 
 Inspired by the limitations of PyPI’s API and the desire for accurate, offline-tracked download counts.
 
 Built with ❤️ and pypistats.
-
-
-
-
-
-
-
-
