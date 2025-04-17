@@ -1,18 +1,16 @@
 ---
-
 name: I used the template!
 description: Let me know you're using the PyPI Tracker template
 title: "📦 I'm using this template!"
 labels: ["template-usage"]
 body:
-
-- type: markdown
+  - type: markdown
     attributes:
       value: |
         🚀 Thanks for using the PyPI Total Downloads Tracker template!  
         This issue lets me know the template is useful and helps track its reach.
 
-- type: input
+  - type: input
     id: repo
     attributes:
       label: Your repository URL
@@ -21,7 +19,7 @@ body:
     validations:
       required: true
 
-- type: textarea
+  - type: textarea
     id: notes
     attributes:
       label: Optional comments
