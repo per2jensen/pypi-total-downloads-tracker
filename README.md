@@ -20,15 +20,17 @@ I use this on my [dar-backup project](https://github.com/per2jensen/dar-backup),
 
 ## 🚀 Quick Start
 
-### 1. Use this template
+### 1. Fork, Clone or download a zip file
 
-Click **“Use this template”** on GitHub to create your own tracker repo.
+Click on the **Fork** button to create your own tracker repo.
 
 Or clone it directly:
 ```bash
 git clone https://github.com/per2jensen/pypi-total-downloads-tracker
 cd pypi-total-downloads-tracker
 ```
+
+You can also just download a zip file (click the blue **Code** button) and play with the script locally.
 
 ### 2. Configure your PyPI package
 
