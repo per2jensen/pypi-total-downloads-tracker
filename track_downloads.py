@@ -67,8 +67,8 @@ def update_readme(total: int):
     updated = False
 
     for i, line in enumerate(lines):
-        if line.strip().startswith(MARKER):
-            lines[i] = f"{MARKER} 📦 Total PyPI downloads: {total}"
+        if MARKER in line:
+            lines[i] = line.replace(MARKER, f"{MARKER} 📦 Total PyPI downloads: {total}")
             updated = True
             break
 

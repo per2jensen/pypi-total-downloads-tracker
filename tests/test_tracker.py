@@ -30,3 +30,21 @@ def test_update_readme(tmp_path):
     track_downloads.update_readme(9999)
     result = readme_path.read_text()
     assert "📦 Total PyPI downloads: 9999" in result
+
+def test_update_readme_with_inline_marker(tmp_path):
+    # Create a temporary README file with an inline marker
+    readme_path = tmp_path / "README.md"
+    readme_path.write_text("Some intro | Downloads: <!--TOTAL_DOWNLOADS--> as of now\n")
+
+    # Patch the module's README_FILE path to use our temp file
+    import track_downloads
+    track_downloads.README_FILE = readme_path
+
+    # Run the update function
+    track_downloads.update_readme(8888)
+
+    # Read and validate the result
+    result = readme_path.read_text()
+    assert "Downloads: <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 8888 as of now" in result
+
+
