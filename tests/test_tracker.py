@@ -109,4 +109,34 @@ def test_readme_displays_warning_on_repeated_count(tmp_path):
     print(result)
 
     expected = "📊 Stats: <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 1234 ⚠️ Repeated count updated daily.\n"
+
+
     assert result == expected
+
+def test_legacy_downloads_json_without_flagged(tmp_path, monkeypatch):
+    # Simulate old downloads.json without "flagged" field
+    downloads_file = tmp_path / "downloads.json"
+    data = {
+        "total": 72,
+        "history": [
+            {"date": "2025-04-15", "count": 36},
+            {"date": "2025-04-16", "count": 36}  # repeated
+        ]
+    }
+    downloads_file.write_text(json.dumps(data))
+
+    import track_downloads
+    monkeypatch.setattr(track_downloads, "JSON_FILE", downloads_file)
+    monkeypatch.setattr(track_downloads, "SEED_TOTAL", 0)
+    monkeypatch.setattr(track_downloads, "get_yesterday_date", lambda: "2025-04-17")
+    monkeypatch.setattr(track_downloads, "fetch_downloads_last_day", lambda _: 36)
+    track_downloads.update_readme = lambda *a, **kw: None  # skip file output
+
+    track_downloads.main()
+
+    updated_data = json.loads(downloads_file.read_text())
+    assert updated_data["history"][-1]["date"] == "2025-04-17"
+    assert updated_data["history"][-1]["count"] == 36
+    assert updated_data["history"][-1]["flagged"] is True
+
+    
