@@ -107,7 +107,8 @@ Built with ❤️ and `pypistats`.
 
 ## 🙋‍♀️ Used By
 
-If you're using this template, [let me know](https://github.com/per2jensen/pypi-total-downloads-tracker/issues/new?template=template-used.md)!
+If you're using this template, [let me know](https://github.com/per2jensen/pypi-total-downloads-tracker/issues/new?assignees=&labels=template-usage&template=template-used.yml&title=%F0%9F%93%A6+I'm+using+this+template%21)
+
 I'd love to showcase your project here.
 
 ### ⭐ Projects Using This Template
