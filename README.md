@@ -6,6 +6,10 @@ A self-hosted, GitHub Actions-powered tool that tracks daily **PyPI download sta
 
 It works entirely offline — no external services — using real data from [pypistats.org](https://pypistats.org/).
 
+> **Live example**
+
+I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take a look if interested.
+
 ---
 
 ## ✨ Features
