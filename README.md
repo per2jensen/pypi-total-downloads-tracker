@@ -46,7 +46,7 @@ It works entirely offline — no external services — using real data from [pyp
 
 ## 🧪 Use as a Template
 
-This repository is a GitHub **template** — click the green **“Use this template”** button at the top of the page to create your own copy.
+This repository is a GitHub **template** — click the blue  **“Use this template”** button at the top right of the page to create your own copy.
 
 ### 🧰 After creating your copy
 
