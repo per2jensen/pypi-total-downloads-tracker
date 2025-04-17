@@ -34,7 +34,13 @@ It works entirely offline — no external services — using real data from [pyp
    <!--TOTAL_DOWNLOADS-->
    ```
 
-4. (Optional) Add a badge pointing to your `downloads.json`:
+If the download tracker fetches the same number of downloads as the day before a warning is added like this:
+
+   ```markdown
+<!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 1234 ⚠️ Repeated count updated daily.
+   ```
+
+4. (Optional) Add a badge pointing to your `downloads.json`
 
    ```markdown
    [![Total Downloads](https://img.shields.io/badge/dynamic/json?color=blue&label=Total%20Downloads&query=total&url=https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/downloads.json)](https://pypi.org/project/YOUR_PACKAGE/)
