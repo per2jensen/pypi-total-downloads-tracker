@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Test cache
+.pytest_cache/
+
+# Virtual environments
+.venv/
+env/
+venv/
+.env
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Mac & Windows
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Output files
+downloads.json

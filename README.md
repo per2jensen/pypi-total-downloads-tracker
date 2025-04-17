@@ -25,6 +25,7 @@ I use this on my [dar-backup project](https://github.com/per2jensen/dar-backup),
 Click on the **Fork** button to create your own tracker repo.
 
 Or clone it directly:
+
 ```bash
 git clone https://github.com/per2jensen/pypi-total-downloads-tracker
 cd pypi-total-downloads-tracker
@@ -35,7 +36,8 @@ You can also just download a zip file (click the blue **Code** button) and play 
 ### 2. Configure your PyPI package
 
 Edit track_downloads.py and set your package name and seed total:
-```
+
+``` text
 PACKAGE_NAME = "your-package-name"
 SEED_TOTAL = 5200  # your known downloads so far
 ```
@@ -44,14 +46,13 @@ SEED_TOTAL = 5200  # your known downloads so far
 
 Add this line where you want the live total to appear:
 
-```
+``` text
 <!--TOTAL_DOWNLOADS-->
 ```
 
 The README.md will be automatically updated and the change committed to the repo.
 
 Please observe that the script currently expects the marker to start at a line.
-
 
 Example of how it looks:
 > <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 5284
@@ -64,8 +65,8 @@ You can also add this Shields.io (this uses an external service) badge:
 
 Substitute this in the badge "code" below:
 
--  YOUR_USERNAME       # Github username
--  your-package-name   # PyPI package name
+- YOUR_USERNAME       # Github username
+- your-package-name   # PyPI package name
 
 ```markdown
 [![Total Downloads](https://img.shields.io/badge/dynamic/json?color=blue&label=Total%20Downloads&query=total&url=https%3A%2F%2Fraw.githubusercontent.com%2FYOUR_USERNAME%2Fpypi-total-downloads-tracker%2Fmain%2Fdownloads.json)](https://pypi.org/project/your-package-name/)
@@ -75,14 +76,15 @@ Substitute this in the badge "code" below:
 
 After editing, push everything to GitHub. The included workflow will run daily and update:
 
-    downloads.json
-
-    README.md
+> downloads.json
+>
+> README.md
 
 You can also trigger the workflow manually via the Actions tab.
 The schedule is commented out in the workflow - remove the `#` and enjoy daily automatic updates to the download totals number :-)
 
 ## 📁 Project Structure
+
 ```text
 .
 ├── track_downloads.py         # The main Python script
@@ -96,6 +98,15 @@ The schedule is commented out in the workflow - remove the `#` and enjoy daily a
 ## 📖 License
 
 MIT — use it, fork it, improve it.
+
+## Test cases
+
+Make sure `pytest` is available
+
+```bash
+cd <path/to//git/pypi-total-downloads-tracker>
+PYTHONPATH=. pytest
+```
 
 ## 🙌 Credits
 
