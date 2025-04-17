@@ -102,3 +102,16 @@ PYTHONPATH=. pytest
 Inspired by the limitations of PyPI’s API and the desire for accurate, offline-tracked download counts.
 
 Built with ❤️ and `pypistats`.
+
+---
+
+## 🙋‍♀️ Used By
+
+If you're using this template, [let me know](https://github.com/per2jensen/pypi-total-downloads-tracker/issues/new?template=template-used.md)!
+I'd love to showcase your project here.
+
+### ⭐ Projects Using This Template
+
+| Project | Description |
+|---------|-------------|
+| *(Your repo here?)* | Submit a quick issue and I'll add you! |
