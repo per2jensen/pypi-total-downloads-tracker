@@ -1,3 +1,9 @@
+The Github respository:
+
+> [pypi-total-downloads-tracker](https://github.com/per2jensen/pypi-total-downloads-tracker)
+
+----
+
 # 📦 PyPI Total Downloads Tracker
 
 [![](https://img.shields.io/badge/readme-auto--update-blue)](https://github.com/per2jensen/pypi-total-downloads-tracker)
@@ -115,3 +121,9 @@ I'd love to showcase your project here.
 | Project | Description |
 |---------|-------------|
 | *(Your repo here?)* | Submit a quick issue and I'll add you! |
+
+----
+
+The Github respository:
+
+> [pypi-total-downloads-tracker](https://github.com/per2jensen/pypi-total-downloads-tracker)
