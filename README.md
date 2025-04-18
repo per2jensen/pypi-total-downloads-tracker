@@ -8,11 +8,14 @@ A self-hosted, GitHub Actions-powered tool that tracks daily **PyPI download sta
 
 It works entirely offline — no external services — using real data from [pypistats.org](https://pypistats.org/).
 
-> **Live example**
+## Badge example from my dar-backup application
+
+> ![Screenshot showing the bagde](badge.png)
+
+### Live example
 
 I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take a look if interested.
 
----
 
 ## ✨ Features
 
@@ -22,7 +25,6 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
 - 🔁 Updates automatically with GitHub Actions
 - ✅ Minimal setup — just one script and one workflow
 
----
 
 ## 🚀 Quick Start
 
@@ -52,8 +54,6 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
 
 5. Push to GitHub — GitHub Actions will track downloads daily and update your badge/README!
 
----
-
 ## 🧪 Use as a Template
 
 This repository is a GitHub **template** — click the blue  **“Use this template”** button at the top right of the page to create your own copy.
@@ -73,8 +73,6 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
 4. Enable GitHub Actions in your new repo.
 5. That's it! 🎉 Your downloads will be tracked and updated automatically.
 
----
-
 ## 📁 Project Structure
 
 ``` text
@@ -86,8 +84,6 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
     └── workflows/
         └── update_downloads.yml  # The GitHub Action
 ```
-
----
 
 ## 📖 License
 
@@ -102,15 +98,11 @@ cd <path/to//git/pypi-total-downloads-tracker>
 PYTHONPATH=. pytest
 ```
 
----
-
 ## 🙌 Credits
 
 Inspired by the limitations of PyPI’s API and the desire for accurate, offline-tracked download counts.
 
 Built with ❤️ and `pypistats`.
-
----
 
 ## 🙋‍♀️ Used By
 
