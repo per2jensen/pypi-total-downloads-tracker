@@ -44,6 +44,8 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
 
 4. (Optional) Add a badge pointing to your `downloads.json`
 
+   Replace "YOUR_USERNAME/YOUR_REPO" and "YOUR_PACKAGE" and drop the markdown shown below where you want the badge.
+
    ```markdown
    [![Total Downloads](https://img.shields.io/badge/dynamic/json?color=blue&label=Total%20Downloads&query=total&url=https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/downloads.json)](https://pypi.org/project/YOUR_PACKAGE/)
    ```
