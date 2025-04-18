@@ -58,7 +58,7 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
 
 ### 🧰 After creating your copy
 
-1. Edit `track_downloads.py` to set your package name and initial count.
+1. Edit `track_downloads.py` to set your package name.
 2. Add this block in your README:
     <!--PYPI_TOTAL_START-->
     📦 Total PyPI downloads: [anything between the markers is replaced]
