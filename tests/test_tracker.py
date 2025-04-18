@@ -1,142 +1,73 @@
 
-import pytest
 import json
+import pytest
+from datetime import datetime, UTC
 from pathlib import Path
-from track_downloads import get_yesterday_date, load_download_data, update_readme
 
-def test_get_yesterday_date_format():
-    date_str = get_yesterday_date()
-    assert len(date_str) == 10  # YYYY-MM-DD
-    assert date_str.count("-") == 2
+# We're testing the block-marker version
+import track_downloads as tracker
 
-def test_load_download_data_seed(tmp_path, monkeypatch):
-    # Use temporary file location
-    dummy_file = tmp_path / "downloads.json"
-    monkeypatch.setattr("track_downloads.JSON_FILE", dummy_file)
-    monkeypatch.setattr("track_downloads.SEED_TOTAL", 1234)
 
-    data = load_download_data()
-    assert data["total"] == 1234
-    assert data["history"] == []
+def test_save_download_data_format(tmp_path, monkeypatch):
+    # Redirect output file
+    json_file = tmp_path / "downloads.json"
+    monkeypatch.setattr(tracker, "JSON_FILE", json_file)
 
-def test_update_readme(tmp_path):
+    # Run save function
+    tracker.save_download_data(12345)
+
+    data = json.loads(json_file.read_text())
+    assert "total" in data
+    assert "fetched" in data
+    assert data["total"] == 12345
+
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
+    assert data["fetched"] == today
+
+
+
+
+def test_update_readme_block_markers(tmp_path):
+    # Setup test README with START and END markers
     readme_path = tmp_path / "README.md"
-    readme_path.write_text("Title\n<!--TOTAL_DOWNLOADS-->\nFooter\n")
+    tracker.README_FILE = readme_path
 
-    # Monkeypatch the path
-    import track_downloads
-    track_downloads.README_FILE = readme_path
+    readme_content = (
+        "# My Project\n"
+        "Some intro text.\n"
+        f"{tracker.START_MARKER}\n"
+        "Old content\n"
+        f"{tracker.END_MARKER}\n"
+        "Footer text.\n"
+    )
+    readme_path.write_text(readme_content)
 
-    track_downloads.update_readme(9999)
-    result = readme_path.read_text()
-    assert "📦 Total PyPI downloads: 9999" in result
+    tracker.update_readme(1234)
+    updated = readme_path.read_text()
 
-def test_update_readme_with_inline_marker(tmp_path):
-    # Create a temporary README file with an inline marker
+    assert f"{tracker.START_MARKER}\n📦 Total PyPI downloads: 1234\n{tracker.END_MARKER}" in updated
+
+
+def test_multiple_runs_do_not_duplicate(tmp_path):
     readme_path = tmp_path / "README.md"
-    readme_path.write_text("Some intro | Downloads: <!--TOTAL_DOWNLOADS--> as of now\n")
+    tracker.README_FILE = readme_path
 
-    # Patch the module's README_FILE path to use our temp file
-    import track_downloads
-    track_downloads.README_FILE = readme_path
+    readme_content = (
+        "# Another Project\n"
+        f"{tracker.START_MARKER}\n"
+        "Initial content\n"
+        f"{tracker.END_MARKER}\n"
+    )
+    readme_path.write_text(readme_content)
 
-    # Run the update function
-    track_downloads.update_readme(8888)
+    tracker.update_readme(1111)
+    tracker.update_readme(2222)
+    tracker.update_readme(3333)
 
-    # Read and validate the result
-    result = readme_path.read_text()
-    assert "Downloads: <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 8888 as of now" in result
+    updated = readme_path.read_text()
 
-
-
-def test_marker_replacement_preserves_line_content(tmp_path):
-    # Test that the marker is replaced inline and surrounding text is preserved
-    readme_path = tmp_path / "README.md"
-    original_line = "📊 Stats: <!--TOTAL_DOWNLOADS--> updated daily.\n"
-    readme_path.write_text(original_line)
-
-    import track_downloads
-    track_downloads.README_FILE = readme_path
-
-    track_downloads.update_readme(4321, flagged=False)
-    result = readme_path.read_text()
-    expected = "📊 Stats: <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 4321 updated daily.\n"
-    assert result == expected
-
-def test_warning_logged_on_repeated_count(capsys, tmp_path, monkeypatch):
-    # Test that a warning is printed to the console when a count is repeated
-    downloads_file = tmp_path / "downloads.json"
-    monkeypatch.setattr("track_downloads.JSON_FILE", downloads_file)
-    monkeypatch.setattr("track_downloads.SEED_TOTAL", 0)
-
-    # Simulate history with one entry
-    data = {
-        "total": 36,
-        "history": [{"date": "2025-04-16", "count": 36}]
-    }
-    downloads_file.write_text(json.dumps(data))
-
-    # Patch date function to fix date
-    import track_downloads
-    yesterday = "2025-04-17"
-    monkeypatch.setattr(track_downloads, "get_yesterday_date", lambda: yesterday)
-
-    # Force same count (repeat)
-    monkeypatch.setattr(track_downloads, "fetch_downloads_last_day", lambda _: 36)
-    track_downloads.update_readme = lambda *args, **kwargs: None  # skip writing README
-
-    track_downloads.main()
-    captured = capsys.readouterr()
-    assert "⚠️ Warning: Download count repeated (36) on 2025-04-17" in captured.out
+    # Should only have ONE 📦 line between the markers
+    assert updated.count("📦 Total PyPI downloads:") == 1
+    assert "📦 Total PyPI downloads: 3333" in updated
 
 
-def test_readme_displays_warning_on_repeated_count(tmp_path):
-    readme_path = tmp_path / "README.md"
-    original_line = "📊 Stats: <!--TOTAL_DOWNLOADS--> updated daily.\n"
-    readme_path.write_text(original_line)
-
-    import sys
-    sys.modules.pop("track_downloads", None)  # Force reload with patched values
-
-    import track_downloads
-    track_downloads.README_FILE = readme_path
-    track_downloads.MARKER = "<!--TOTAL_DOWNLOADS-->"  # just in case
-
-    track_downloads.update_readme(1234, flagged=True)
-    result = readme_path.read_text()
-
-    print("=== README OUTPUT ===")
-    print(result)
-
-    expected = "📊 Stats: <!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 1234 ⚠️ Repeated count updated daily.\n"
-
-
-    assert result == expected
-
-def test_legacy_downloads_json_without_flagged(tmp_path, monkeypatch):
-    # Simulate old downloads.json without "flagged" field
-    downloads_file = tmp_path / "downloads.json"
-    data = {
-        "total": 72,
-        "history": [
-            {"date": "2025-04-15", "count": 36},
-            {"date": "2025-04-16", "count": 36}  # repeated
-        ]
-    }
-    downloads_file.write_text(json.dumps(data))
-
-    import track_downloads
-    monkeypatch.setattr(track_downloads, "JSON_FILE", downloads_file)
-    monkeypatch.setattr(track_downloads, "SEED_TOTAL", 0)
-    monkeypatch.setattr(track_downloads, "get_yesterday_date", lambda: "2025-04-17")
-    monkeypatch.setattr(track_downloads, "fetch_downloads_last_day", lambda _: 36)
-    track_downloads.update_readme = lambda *a, **kw: None  # skip file output
-
-    track_downloads.main()
-
-    updated_data = json.loads(downloads_file.read_text())
-    assert updated_data["history"][-1]["date"] == "2025-04-17"
-    assert updated_data["history"][-1]["count"] == 36
-    assert updated_data["history"][-1]["flagged"] is True
-
-    

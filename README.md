@@ -16,8 +16,8 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
 
 ## ✨ Features
 
-- 📊 Tracks total PyPI downloads using `pypistats recent`
-- 📈 Logs daily history in `downloads.json`
+- 📊 Fetches total PyPI downloads using `pypistats overall`
+- 📝 Saves to a simple JSON file (`total` + `fetched`)
 - 🛡️ Renders a live Shields.io badge
 - 🔁 Updates automatically with GitHub Actions
 - ✅ Minimal setup — just one script and one workflow
@@ -31,19 +31,15 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
 
    ```python
    PACKAGE_NAME = "your-package-name"
-   SEED_TOTAL = 5200  # your known downloads so far
+
    ```
 
-3. Add this marker to your `README.md` where you want the live number:
+3. Add these two markers to your `README.md` where you want the live number:
 
    ```markdown
-   <!--TOTAL_DOWNLOADS-->
-   ```
-
-If the download tracker fetches the same number of downloads as the day before a warning is added like this:
-
-   ```markdown
-<!--TOTAL_DOWNLOADS--> 📦 Total PyPI downloads: 1234 ⚠️ Repeated count updated daily.
+   <!--PYPI_TOTAL_START-->
+   📦 Total PyPI downloads: (this will be replaced)
+   <!--PYPI_TOTAL_END-->
    ```
 
 4. (Optional) Add a badge pointing to your `downloads.json`
@@ -63,7 +59,10 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
 ### 🧰 After creating your copy
 
 1. Edit `track_downloads.py` to set your package name and initial count.
-2. Add the marker `<!--TOTAL_DOWNLOADS-->` in your README.
+2. Add this block in your README:
+    <!--PYPI_TOTAL_START-->
+    📦 Total PyPI downloads: [anything between the markers is replaced]
+    <!--PYPI_TOTAL_END-->
 3. Add the dynamic badge (see above) to display the live total.
 4. Enable GitHub Actions in your new repo.
 5. That's it! 🎉 Your downloads will be tracked and updated automatically.
@@ -75,7 +74,7 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
 ``` text
 .
 ├── track_downloads.py         # The main Python script
-├── downloads.json             # Daily tracked data (auto-generated)
+├── downloads.json             # Total downloads & fetch date
 ├── README.md                  # Your project + live total
 └── .github/
     └── workflows/
