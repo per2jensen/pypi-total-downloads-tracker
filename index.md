@@ -79,48 +79,15 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
 4. Enable GitHub Actions in your new repo.
 5. That's it! 🎉 Your downloads will be tracked and updated automatically.
 
-## 📁 Project Structure
-
-``` text
-.
-├── track_downloads.py         # The main Python script
-├── downloads.json             # Total downloads & fetch date
-├── README.md                  # Your project + live total
-└── .github/
-    └── workflows/
-        └── update_downloads.yml  # The GitHub Action
-```
-
 ## 📖 License
 
 MIT — use it, fork it, improve it.
-
-## Test cases
-
-Make sure pytest is available
-
-``` bash
-cd <path/to//git/pypi-total-downloads-tracker>
-PYTHONPATH=. pytest
-```
 
 ## 🙌 Credits
 
 Inspired by the limitations of PyPI’s API and the desire for accurate, offline-tracked download counts.
 
 Built with ❤️ and `pypistats`.
-
-## 🙋‍♀️ Used By
-
-If you're using this template, [let me know](https://github.com/per2jensen/pypi-total-downloads-tracker/issues/new?assignees=&labels=template-usage&template=template-used.yml&title=%F0%9F%93%A6+I'm+using+this+template%21)
-
-I'd love to showcase your project here.
-
-### ⭐ Projects Using This Template
-
-| Project | Description |
-|---------|-------------|
-| *(Your repo here?)* | Submit a quick issue and I'll add you! |
 
 ----
 
