@@ -60,9 +60,13 @@ This repository is a GitHub **template** — click the blue  **“Use this templ
 
 1. Edit `track_downloads.py` to set your package name.
 2. Add this block in your README:
+
+   ```markdown
     <!--PYPI_TOTAL_START-->
     📦 Total PyPI downloads: [anything between the markers is replaced]
     <!--PYPI_TOTAL_END-->
+   ```
+
 3. Add the dynamic badge (see above) to display the live total.
 4. Enable GitHub Actions in your new repo.
 5. That's it! 🎉 Your downloads will be tracked and updated automatically.
