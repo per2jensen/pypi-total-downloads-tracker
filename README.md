@@ -19,7 +19,7 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
 
 ## ✨ Features
 
-- 📊 Fetches total PyPI downloads using `pypistats overall`
+- 📊 Fetches total PyPI downloads using `pypistats overall <package>`  (using the "without_mirrors" number)
 - 📝 Saves to a simple JSON file (`total` + `fetched`)
 - 🛡️ Renders a live Shields.io badge
 - 🔁 Updates automatically with GitHub Actions
@@ -53,6 +53,10 @@ I use it on my [dar-backup repo](https://github.com/per2jensen/dar-backup), take
    ```
 
 5. Push to GitHub — GitHub Actions will track downloads daily and update your badge/README!
+
+## Funky PyPI behaviour
+
+I have seen my "downloads without mirrors" go backwards, that is probably due to PyPI doing some cleanup in the data and removing bot traffic.
 
 ## 🧪 Use as a Template
 
