@@ -2,8 +2,9 @@ name: Update PyPI Downloads
 
 on:
   # Remove the "#" to get the cronjob running at 01:15 UTC
-  # schedule:
-  #  - cron: '15 20 * * *'  # 20:15 PDT = 03:15 UTC next day
+  # doc:  https://docs.github.com/en/actions/use-cases-and-examples/project-management/scheduling-issue-creation
+  #schedule:
+  #  - cron: 15 3 * * *     # 03:15 UTC, see doc link above
   workflow_dispatch:        # Allow manual runs
 
 jobs:
@@ -14,6 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Log current UTC time
+        run: |
+          echo Time of workflow run in UTC:
+          date -u
+          
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
