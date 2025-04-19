@@ -4,7 +4,7 @@ on:
   # Remove the "#" to get the cronjob running at 01:15 UTC
   # doc:  https://docs.github.com/en/actions/use-cases-and-examples/project-management/scheduling-issue-creation
   #schedule:
-  #  - cron: 15 3 * * *     # 03:15 UTC, see doc link above
+  #  - cron: '15 3 * * *'     # 03:15 UTC, see doc link above
   workflow_dispatch:        # Allow manual runs
 
 jobs:
