@@ -43,6 +43,10 @@ jobs:
         run: python track_downloads.py
 
 
+      # This step checks if any file other than `downloads.json` (and possibly `README.md`) have been modified.
+      #
+      # If you also want to update README.md, use this below:
+      #    if git diff --name-only | grep -vE "^(downloads\.json|README\.md)$"; then
       - name: Verify changes
         run: |
           if git diff --name-only | grep -v "downloads.json"; then
